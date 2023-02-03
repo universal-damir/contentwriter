@@ -26,10 +26,6 @@ app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
 
-        // Define the bearer token for the API request
-        const bearer = `Bearer ${process.env.OPEN_AI_API_KEY}`;
-        openai.defaults.headers.Authorization = bearer;
-
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt,
@@ -50,3 +46,4 @@ app.post('/', async (req, res) => {
 })
 
 app.listen(9000, () => console.log('Server is running on port https://content-writer.onrender.com'));
+
