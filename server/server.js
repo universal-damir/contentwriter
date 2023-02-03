@@ -7,7 +7,7 @@ import { Configuration, OpenAIApi } from 'openai';
 dotenv.config();
 
 const configuration = new Configuration({
-    apiKey: process.env.OPEN_AI_API_KEY,
+    apiKey: process.env.OPEN_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -25,6 +25,10 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
+
+        // Define the bearer token for the API request
+        const bearer = `Bearer ${process.env.OPEN_API_KEY}`;
+        openai.defaults.headers.Authorization = bearer;
 
         const response = await openai.createCompletion({
             model: "text-davinci-003",
